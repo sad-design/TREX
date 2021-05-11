@@ -13,6 +13,8 @@ var score=0;
 var gameOver, restart;
 
 
+var x = (windowWidth + 10);
+
 
 function preload(){
   trex_running =   loadAnimation("trex1.png","trex3.png","trex4.png");
@@ -34,8 +36,9 @@ function preload(){
 }
 
 function setup() {
-  <canvas id ="asd"></canvas>
   
+  createCanvas(windowWidth, windowHeight);
+
   trex = createSprite(50,180,20,50);
   
   trex.addAnimation("running", trex_running);
@@ -72,7 +75,8 @@ function draw() {
   //trex.debug = true;
   background(255);
   text("Score: "+ score, 500,50);
-  
+  console.log(x);
+
   if (gameState===PLAY){
     score = score + Math.round(getFrameRate()/60);
     ground.velocityX = -(6 + 3*score/100);
@@ -128,7 +132,7 @@ function spawnClouds() {
     cloud.y = Math.round(random(80,120));
     cloud.addImage(cloudImage);
     cloud.scale = 0.5;
-    cloud.velocityX = -3;
+    cloud.velocityX = -(6+3*score/100);
     
      //assign lifetime to the variable
     cloud.lifetime = 200;
@@ -143,9 +147,11 @@ function spawnClouds() {
   
 }
 
+
+
 function spawnObstacles() {
   if(frameCount % 60 === 0) {
-    var obstacle = createSprite(600,165,10,40);
+    var obstacle = createSprite(1500,165,10,40);
     //obstacle.debug = true;
     obstacle.velocityX = -(6 + 3*score/100);
     
